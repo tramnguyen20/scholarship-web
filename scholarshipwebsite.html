@@ -1,0 +1,41 @@
+<input type="text" placeholder="Loại học bổng" id="loai">
+      <input type="number" placeholder="Số tiền học bổng" id="st">
+      <button type="button" onclick="addRow()">Thêm</button>
+    </form>
+    <p id="status"></p>
+    <h3 id="dynamic-title">Kết quả học bổng</h3>
+    <div id="table-container">
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th>MSSV</th><th>Họ</th><th>Tên</th><th>Lớp</th><th>Điểm học tập</th><th>Điểm rèn luyện</th><th>Số tín chỉ</th><th>Chứng chỉ ngoại ngữ</th><th>Học phí</th><th>Loại học bổng</th><th>Số tiền học bổng</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function addRow() {
+      const get = id => document.getElementById(id).value;
+      const values = [get('mssv'), get('ho'), get('ten'), get('lop'), get('dht'), get('drl'), get('tc'), get('ccnn'), get('hp'), get('loai'), get('st')];
+      if (values.some(v => v === '')) {
+        document.getElementById('status').textContent = 'Vui lòng điền đầy đủ thông tin!';
+        document.getElementById('status').style.color = 'red';
+        return;
+      }
+      const tr = document.createElement('tr');
+      values.forEach(val => {
+        const td = document.createElement('td');
+        td.textContent = val;
+        tr.appendChild(td);
+      });
+      document.querySelector('#data-table tbody').appendChild(tr);
+      document.getElementById('status').textContent = 'Đã thêm dòng thành công!';
+      document.getElementById('status').style.color = 'green';
+      document.getElementById('inputForm').reset();
+    }
+  </script>
+</body>
+</html>
